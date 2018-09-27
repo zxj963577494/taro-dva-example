@@ -1,5 +1,5 @@
 const config = {
-  projectName: 'overwatch-events',
+  projectName: 'taro-dva-example',
   date: '2018-9-27',
   designWidth: 750,
   sourceRoot: 'src',
@@ -48,7 +48,17 @@ const config = {
   defineConstants: {
   },
   weapp: {
-
+    module: {
+      postcss: {
+        autoprefixer: {
+          enable: true
+        },
+        url: {
+          enable: true,
+          limit: 10240
+        }
+      }
+    }
   },
   h5: {
     publicPath: '/',

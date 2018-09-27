@@ -2,20 +2,25 @@ import Taro, { Component } from '@tarojs/taro'
 import '@tarojs/async-await'
 import { Provider } from '@tarojs/redux'
 
+import dva from './dva'
+import models from './model'
+import action from './utils/action'
 import Index from './pages/index'
-
-import configStore from './store'
 
 import './app.less'
 
-const store = configStore()
+const dvaApp = dva.createApp({
+  initialState: {},
+  models: models,
+  onError(e, dispatch) {
+    dispatch(action('sys/error', e))
+  }
+})
+const store = dvaApp.getStore()
 
 class App extends Component {
-
   config = {
-    pages: [
-      'pages/index/index'
-    ],
+    pages: ['pages/index/index'],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
@@ -24,15 +29,15 @@ class App extends Component {
     }
   }
 
-  componentDidMount () {}
+  componentDidMount() {}
 
-  componentDidShow () {}
+  componentDidShow() {}
 
-  componentDidHide () {}
+  componentDidHide() {}
 
-  componentCatchError () {}
+  componentCatchError() {}
 
-  render () {
+  render() {
     return (
       <Provider store={store}>
         <Index />
